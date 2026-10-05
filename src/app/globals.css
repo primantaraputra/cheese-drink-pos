@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: #fafaf7;
+    --foreground: #292524;
+    --card: #ffffff;
+    --card-foreground: #292524;
+    --popover: #ffffff;
+    --popover-foreground: #292524;
+    --primary: #f59e0b;
+    --primary-foreground: #451a03;
+    --secondary: #fef3c7;
+    --secondary-foreground: #78350f;
+    --muted: #f5f5f4;
+    --muted-foreground: #78716c;
+    --accent: #fffbeb;
+    --accent-foreground: #78350f;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --success: #10b981;
+    --success-foreground: #ffffff;
+    --border: #e7e5e4;
+    --input: #e7e5e4;
+    --ring: #f59e0b;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: #171513;
+    --foreground: #f5f5f4;
+    --card: #221e1a;
+    --card-foreground: #f5f5f4;
+    --popover: #221e1a;
+    --popover-foreground: #f5f5f4;
+    --primary: #fbbf24;
+    --primary-foreground: #451a03;
+    --secondary: #2e2823;
+    --secondary-foreground: #fef3c7;
+    --muted: #26221f;
+    --muted-foreground: #d6d3d1;
+    --accent: #2e2823;
+    --accent-foreground: #fbbf24;
+    --destructive: #f87171;
+    --destructive-foreground: #ffffff;
+    --success: #34d399;
+    --success-foreground: #064e3b;
+    --border: #38332e;
+    --input: #38332e;
+    --ring: #fbbf24;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #fafaf9;
+}
+
+.dark th {
+  color: #a8a29e;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6d3d1;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #57534e;
+}
+
+/* Thermal receipt print styles */
+.print-receipt-offscreen {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 58mm;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media print {
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #thermal-receipt,
+  #thermal-receipt * {
+    visibility: visible !important;
+  }
+
+  .print-receipt-offscreen {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  #thermal-receipt {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 58mm !important;
+    margin: 0 !important;
+    padding: 3mm !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  #thermal-receipt[data-width="80"] {
+    max-width: 80mm !important;
+  }
+
+  @page {
+    margin: 0;
+    size: auto;
+  }
+}
